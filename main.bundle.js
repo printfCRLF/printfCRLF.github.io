@@ -418,7 +418,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/instruments/add/instrument-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3 id=\"add-instrument-header\">Add an instrument\n  <button type=\"button\" class=\"btn btn-default\" (click)=\"expand()\">Add</button>\n</h3>\n\n<form class=\"form-inline\" *ngIf=\"mode === 'expand'\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.name\" name=\"name\" placeholder=\"AMAZ\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Price</label>\n    <input type=\"number\" [(ngModel)]=\"instrument.price\" name=\"price\" placeholder=\"1014.35\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Issuer</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.issuer\" name=\"issuer\" placeholder=\"Asea Brown Boveri\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label class=\"active\">Currency</label>\n    <app-currency-dropdown [currency]=\"instrument.currency\"\n                           (onSelected)=\"currencySelected($event)\"\n                           class=\"w-100\"></app-currency-dropdown>\n  </div>\n  <div class=\"form-group\">\n    <button type=\"submit\" class=\"btn btn-default\" (click)=\"add(instrument)\">Done</button>\n  </div>\n\n</form>\n"
+module.exports = "<h3 id=\"add-instrument-header\">Add an instrument\n  <button type=\"button\" class=\"btn btn-default\" (click)=\"expand()\">Add</button>\n</h3>\n\n<form class=\"form-inline\" [hidden]=\"mode === 'collapsed'\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.name\" name=\"name\" placeholder=\"AMAZ\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Price</label>\n    <input type=\"number\" [(ngModel)]=\"instrument.price\" name=\"price\" placeholder=\"1014.35\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Issuer</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.issuer\" name=\"issuer\" placeholder=\"Asea Brown Boveri\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label class=\"active\">Currency</label>\n    <app-currency-dropdown [currency]=\"instrument.currency\"\n                           (onSelected)=\"currencySelected($event)\"\n                           class=\"w-100\"></app-currency-dropdown>\n  </div>\n  <div class=\"form-group\">\n    <button type=\"submit\" class=\"btn btn-default\" (click)=\"add(instrument)\">Done</button>\n  </div>\n\n</form>\n\n"
 
 /***/ }),
 
@@ -495,7 +495,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px) {\r\n  .col-lg-4,.col-md-4 {\r\n    border-left: solid 1px lightgrey;\r\n  }\r\n}\r\n\r\n@media (min-width: 681px) and (max-width: 767px) {\r\n  .col-sm-6,.col-xs-6 {\r\n    border-top: solid 1px lightgrey;\r\n  }\r\n\r\n  .p-4 {\r\n    padding: 0.8rem !important;\r\n  }\r\n}\r\n\r\n@media (max-width: 420px ) {\r\n  .p-4 {\r\n    padding: 0.2rem !important;\r\n  }\r\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "@media (min-width: 768px) {\r\n  .col-lg-4,.col-md-4 {\r\n    border-left: solid 1px lightgrey;\r\n  }\r\n}\r\n\r\n@media (max-width: 420px ) {\r\n  .col-sm-6,.col-xs-6 {\r\n    border-top: solid 1px lightgrey;\r\n  }\r\n\r\n  .p-4 {\r\n    padding: 0.2rem !important;\r\n  }\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
