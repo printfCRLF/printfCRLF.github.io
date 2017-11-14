@@ -291,7 +291,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/deal/deal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"instrument\">\n  <form class=\"container\">\n    <h3 class=\"text-center\" >{{instrument.name}}</h3>\n\n    <div class=\"text-center mt-4 mb-2\">\n      <div class=\"btn-group\" data-toggle=\"buttons\">\n        <label class=\"btn btn-outline-default active\" (click)=\"clickLong()\">\n          <input type=\"radio\" name=\"options\" id=\"long\" autocomplete=\"off\">Long</label>\n        <label class=\"btn btn-outline-default\" (click)=\"clickShort()\">\n          <input type=\"radio\" name=\"options\" id=\"short\" autocomplete=\"off\" >Short</label>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Price</label>\n      </div>\n      <div class=\"col-6\">\n        <input type=\"number\" [(ngModel)]=\"deal.price\" name=\"price\"/>\n      </div>\n      <div class=\"col-2 mt-2\">\n        {{instrument.currency}}\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Size</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"number\" [(ngModel)]=\"deal.quantity\" name=\"quantity\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Portfolio</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.portfolioName\" name=\"portfolio\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Acquirer</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.acquirer\" name=\"acquirer\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Counter party</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.counterParty\" name=\"counterParty\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Acquirer</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.marketPlace\" name=\"marketPlace\"/>\n      </div>\n    </div>\n\n    <div class=\"text-center mt-4\">\n      <button class=\"btn btn-default\" (click)=\"placeDeal()\">Place deal</button>\n    </div>\n  </form>\n\n</div>\n"
+module.exports = "<div *ngIf=\"instrument\">\n  <form class=\"container\">\n    <h3 class=\"text-center\" >{{instrument.name}}</h3>\n\n    <div class=\"text-center mt-4 mb-2\">\n      <div class=\"btn-group\" data-toggle=\"buttons\">\n        <label class=\"btn btn-outline-default active\" (click)=\"clickLong()\">\n          <input type=\"radio\" name=\"options\" id=\"long\" autocomplete=\"off\">Long</label>\n        <label class=\"btn btn-outline-default\" (click)=\"clickShort()\">\n          <input type=\"radio\" name=\"options\" id=\"short\" autocomplete=\"off\" >Short</label>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Price</label>\n      </div>\n      <div class=\"col-6\">\n        <input type=\"number\" [(ngModel)]=\"deal.price\" name=\"price\"/>\n      </div>\n      <div class=\"col-2 mt-2\">\n        {{instrument.currency}}\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Size</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"number\" [(ngModel)]=\"deal.quantity\" name=\"quantity\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Portfolio</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.portfolioName\" name=\"portfolio\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Acquirer</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.acquirer\" name=\"acquirer\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Counter party</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.counterParty\" name=\"counterParty\"/>\n      </div>\n    </div>\n\n    <div class=\"row mt-2\">\n      <div class=\"col-3 mt-2\">\n        <label class=\"float-right\">Acquirer</label>\n      </div>\n      <div class=\"col-8\">\n        <input type=\"text\" [(ngModel)]=\"deal.marketPlace\" name=\"marketPlace\"/>\n      </div>\n    </div>\n\n    <div class=\"text-center mt-4 mb-4\">\n      <button class=\"btn btn-default\" id=\"deal-button\" (click)=\"placeDeal()\">Place deal</button>\n    </div>\n  </form>\n\n</div>\n"
 
 /***/ }),
 
@@ -342,6 +342,10 @@ var DealComponent = (function () {
     DealComponent.prototype.placeDeal = function () {
         this.instrumentService.update(this.deal.instrument.id, this.deal.price);
         this.portfolioService.add(this.deal);
+        setTimeout(function () {
+            var element = document.getElementById('add-instrument-header');
+            element.scrollIntoView();
+        }, 500);
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["D" /* Input */])(),
@@ -414,7 +418,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/instruments/add/instrument-add.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>Add an instrument</h3>\n<form class=\"form-inline\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.name\" name=\"name\" placeholder=\"AMAZ\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Price</label>\n    <input type=\"number\" [(ngModel)]=\"instrument.price\" name=\"price\" placeholder=\"1014.35\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Issuer</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.issuer\" name=\"issuer\" placeholder=\"Asea Brown Boveri\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label class=\"active\">Currency</label>\n    <app-currency-dropdown [currency]=\"instrument.currency\"\n                           (onSelected)=\"currencySelected($event)\"\n                           class=\"w-100\"></app-currency-dropdown>\n  </div>\n  <div class=\"form-group\">\n    <button type=\"submit\" class=\"btn btn-default\" (click)=\"add(instrument)\">Add</button>\n  </div>\n\n</form>\n"
+module.exports = "<h3 id=\"add-instrument-header\">Add an instrument\n  <button type=\"button\" class=\"btn btn-default\" (click)=\"expand()\">Add</button>\n</h3>\n\n<form class=\"form-inline\" *ngIf=\"mode === 'expand'\">\n  <div class=\"form-group\">\n    <label>Name</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.name\" name=\"name\" placeholder=\"AMAZ\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Price</label>\n    <input type=\"number\" [(ngModel)]=\"instrument.price\" name=\"price\" placeholder=\"1014.35\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label>Issuer</label>\n    <input type=\"text\" [(ngModel)]=\"instrument.issuer\" name=\"issuer\" placeholder=\"Asea Brown Boveri\"/>\n  </div>\n\n  <div class=\"form-group\">\n    <label class=\"active\">Currency</label>\n    <app-currency-dropdown [currency]=\"instrument.currency\"\n                           (onSelected)=\"currencySelected($event)\"\n                           class=\"w-100\"></app-currency-dropdown>\n  </div>\n  <div class=\"form-group\">\n    <button type=\"submit\" class=\"btn btn-default\" (click)=\"add(instrument)\">Done</button>\n  </div>\n\n</form>\n"
 
 /***/ }),
 
@@ -453,12 +457,17 @@ var InstrumentAddComponent = (function () {
         this.instrumentService = instrumentService;
         // instrument: Instrument = { id: 100, name : 'IBM', issuer : 'NYSE', currency: Currency.USD};
         this.instrument = new __WEBPACK_IMPORTED_MODULE_2__instrument__["a" /* Instrument */](-1, 'AMAZ', 1014.22, 'NYSE', __WEBPACK_IMPORTED_MODULE_1__currency__["a" /* Currency */].USD);
+        this.mode = 'collapsed';
     }
     InstrumentAddComponent.prototype.ngOnInit = function () {
     };
     InstrumentAddComponent.prototype.add = function (instrument) {
         var copy = __assign({}, instrument);
         this.instrumentService.add(copy);
+        this.mode = 'collapsed';
+    };
+    InstrumentAddComponent.prototype.expand = function () {
+        this.mode = 'expand';
     };
     InstrumentAddComponent.prototype.currencySelected = function (currency) {
         this.instrument.currency = currency;
@@ -486,7 +495,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@media (max-width: 767px) {\r\n  .col-sm-6,.col-xs-6 {\r\n    border-top: solid 1px lightgrey;\r\n  }\r\n}\r\n\r\n@media (min-width: 768px) {\r\n  .col-lg-4,.col-md-4 {\r\n    border-left: solid 1px lightgrey;\r\n  }\r\n}\r\n", ""]);
+exports.push([module.i, "@media (min-width: 768px) {\r\n  .col-lg-4,.col-md-4 {\r\n    border-left: solid 1px lightgrey;\r\n  }\r\n}\r\n\r\n@media (min-width: 681px) and (max-width: 767px) {\r\n  .col-sm-6,.col-xs-6 {\r\n    border-top: solid 1px lightgrey;\r\n  }\r\n\r\n  .p-4 {\r\n    padding: 0.8rem !important;\r\n  }\r\n}\r\n\r\n@media (max-width: 420px ) {\r\n  .p-4 {\r\n    padding: 0.2rem !important;\r\n  }\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -499,7 +508,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/instruments/container/instrument-container.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid p-4\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-8 \">\r\n      <app-instrument-add ></app-instrument-add>\r\n    </div>\r\n  </div>\r\n  <div class=\"row \">\r\n    <div class=\"col-lg-8 col-md-8 col-sm-6 col-xs-6 mt-2 pt-4\">\r\n        <app-instrument-list\r\n                             [selectedInstrument]=\"selectedInstrument\"\r\n                             (onSelected) = \"onSelected($event)\" ></app-instrument-list>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 col-md-4 col-sm-6 col-xs-6 mt-2 pt-4\">\r\n      <app-deal [instrument]=\"selectedInstrument\"></app-deal>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
+module.exports = "<div class=\"container-fluid p-4\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-8 col-md-8 \">\r\n      <app-instrument-add></app-instrument-add>\r\n    </div>\r\n  </div>\r\n  <div class=\"row \">\r\n    <div class=\"col-lg-8 col-md-8 col-sm-6 col-xs-6 mt-2 pt-4\">\r\n        <app-instrument-list\r\n                             [selectedInstrument]=\"selectedInstrument\"\r\n                             (onSelected) = \"onSelected($event)\" ></app-instrument-list>\r\n    </div>\r\n\r\n    <div class=\"col-lg-4 col-md-4 col-sm-6 col-xs-6 mt-2 pt-4\">\r\n      <app-deal [instrument]=\"selectedInstrument\"></app-deal>\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ }),
 
@@ -527,6 +536,10 @@ var InstrumentContainerComponent = (function () {
     }
     InstrumentContainerComponent.prototype.onSelected = function (instrument) {
         this.selectedInstrument = instrument;
+        setTimeout(function () {
+            var element = document.getElementById('deal-button');
+            element.scrollIntoView();
+        }, 500);
     };
     InstrumentContainerComponent.prototype.ngOnInit = function () { };
     InstrumentContainerComponent = __decorate([
@@ -656,7 +669,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".table {\r\n  width: 100%;\r\n}\r\n\r\n.table tr.selected {\r\n  background-color: #CFD8DC;\r\n}\r\n\r\n.table tr.selected:hover {\r\n  background-color: #BBD8DC;\r\n}\r\n", ""]);
+exports.push([module.i, ".table {\r\n  width: 100%;\r\n}\r\n\r\n.table tr.selected {\r\n  background-color: #CFD8DC;\r\n}\r\n\r\n.table tr.selected:hover {\r\n  background-color: #BBD8DC;\r\n}\r\n\r\n@media (max-width: 420px) {\r\n\r\n  table.table td, table.table th {\r\n    padding-left: 0.3rem;\r\n    padding-right: 0.3rem;\r\n  }\r\n\r\n  .header-market-price span {\r\n    display: none;\r\n  }\r\n\r\n  .header-market-price:after {\r\n    content: \"Price\"\r\n  }\r\n\r\n  .header-currency span {\r\n    display: none;\r\n  }\r\n\r\n  .header-currency:after {\r\n    content: \"$\"\r\n  }\r\n}\r\n", ""]);
 
 // exports
 
@@ -669,7 +682,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/instruments/list/instrument-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h3>List of instruments </h3>\n<table class=\"table table-striped table-hover\">\n  <thead>\n  <th>Id</th>\n  <th>Name</th>\n  <th>Market Price</th>\n  <th>Issuer</th>\n  <th>Currency</th>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let instrument of instruments\"\n      [class.selected]=\"instrument === selectedInstrument\"\n      (click)=\"onSelect(instrument)\">\n    <td>{{instrument.id}}</td>\n    <td>{{instrument.name}}</td>\n    <td>{{instrument.price | number:'1.2-2' }}</td>\n    <td>{{instrument.issuer}}</td>\n    <td>{{instrument.currency}}</td>\n  </tr>\n  </tbody>\n</table>\n"
+module.exports = "<h3>List of instruments </h3>\n<table class=\"table table-striped table-hover\">\n  <thead>\n  <th>Id</th>\n  <th>Name</th>\n  <th class=\"text-right header-market-price\"><span>Market Price</span></th>\n  <th>Issuer</th>\n  <th class=\"header-currency\"><span>Currency</span></th>\n  </thead>\n  <tbody>\n  <tr *ngFor=\"let instrument of instruments\"\n      [class.selected]=\"instrument === selectedInstrument\"\n      (click)=\"onSelect(instrument)\">\n    <td>{{instrument.id}}</td>\n    <td>{{instrument.name}}</td>\n    <td class=\"text-right\">{{instrument.price | number:'1.2-2' }}</td>\n    <td>{{instrument.issuer}}</td>\n    <td>{{instrument.currency}}</td>\n  </tr>\n  </tbody>\n</table>\n"
 
 /***/ }),
 
@@ -1042,7 +1055,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "@media (max-width: 767px) {\r\n  .sm-hide {\r\n    display: none;\r\n  }\r\n\r\n  .header-quantity span{\r\n    display: none;\r\n  }\r\n\r\n  .header-quantity:after {\r\n    content: \"Qty.\";\r\n  }\r\n\r\n  .header-direction span{\r\n    display: none;\r\n  }\r\n\r\n  .header-direction:after {\r\n    content: \"Dir.\";\r\n  }\r\n\r\n  .p-4 {\r\n    padding: 0.8rem !important;\r\n  }\r\n\r\n  table.table td {\r\n    padding: 0.3rem;\r\n    padding-top: 0.6rem;\r\n    padding-bottom: 0.6rem;\r\n  }\r\n}\r\n\r\n", ""]);
+exports.push([module.i, "@media (max-width: 420px) {\r\n  .sm-hide {\r\n    display: none;\r\n  }\r\n\r\n  .header-market-price span {\r\n    display: none;\r\n  }\r\n\r\n  .header-market-price:after {\r\n    content: \"Mkt. Price\"\r\n  }\r\n\r\n  .header-quantity span{\r\n    display: none;\r\n  }\r\n\r\n  .header-quantity:after {\r\n    content: \"Qty.\";\r\n  }\r\n\r\n  .header-direction span{\r\n    display: none;\r\n  }\r\n\r\n  .header-direction:after {\r\n    content: \"Dir.\";\r\n  }\r\n\r\n  .p-4 {\r\n    padding: 0.2rem !important;\r\n  }\r\n\r\n  table.table td, table.table th {\r\n    padding-left: 0.3rem;\r\n    padding-right: 0.3rem;\r\n  }\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -1055,7 +1068,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/portfolios/portfolios.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"p-4\">\n  <button class=\"btn btn-default\" (click)=\"load()\">Load</button>\n  <button class=\"btn btn-default\" (click)=\"reset()\">Reset</button>\n\n  <table class=\"table table-striped table-hover\">\n    <thead>\n      <tr class=\"font-bold sm-hide\">\n        <th></th>\n        <th colspan=\"3\" class=\"text-center\">Instrument</th>\n        <th colspan=\"4\" class=\"text-center\">Position</th>\n        <th colspan=\"3\" class=\"text-center\">Profit / Loss</th>\n      </tr>\n      <tr class=\"font-bold \">\n        <th class=\"\">Portfolio</th>\n        <th class=\"text-right\">Market Price</th>\n        <th class=\"sm-hide\">Currency</th>\n        <th class=\"sm-hide\">Issuer</th>\n        <th class=\"header-direction\"><span>Direction</span></th>\n        <th class=\"text-right\">Price</th>\n        <th class=\"text-right header-quantity\"><span>Quantity</span></th>\n        <th class=\"text-right sm-hide\">Value</th>\n        <th class=\"text-right\">TPL</th>\n        <th class=\"text-right sm-hide\">UPL</th>\n        <th class=\"text-right sm-hide\">RPL</th>\n      </tr>\n    </thead>\n\n    <tbody>\n\n      <ng-container *ngFor=\"let kv of portfolios() | keyValue\">\n        <tr class=\"border\">\n          <td class=\"font-bold\">{{kv.key}}</td>\n          <td></td>\n          <td class=\"sm-hide\"></td>\n          <td class=\"sm-hide\"></td>\n          <td></td>\n          <td></td>\n          <td></td>\n          <td class=\"sm-hide\"></td>\n          <td class=\"font-bold text-right \">{{kv.value.pnl.tpl() | number:\"1.2-2\"}}</td>\n          <td class=\"font-bold text-right sm-hide\">{{kv.value.pnl.upl | number:\"1.2-2\"}}</td>\n          <td class=\"font-bold text-right sm-hide\">{{kv.value.pnl.rpl | number:\"1.2-2\"}}</td>\n        </tr>\n        <tr *ngFor=\"let position of kv.value.positions\" class=\"border\">\n          <td class=\"border\">\n            <span class=\"ml-2 mr-2\"> </span>\n            <span>{{position.instrument.name}}</span>\n          </td>\n          <td class=\"text-right\">{{ getMarketPrice(position.instrument.id) | number:\"1.2-2\"}}</td>\n          <td class=\"sm-hide\">{{position.instrument.currency}}</td>\n          <td class=\"border border-left-0 sm-hide\">{{position.instrument.issuer}}</td>\n          <td>{{position.direction}}</td>\n          <td class=\"text-right\">{{position.price | number:\"1.2-2\"}}</td>\n          <td class=\"text-right\">{{position.quantity}}</td>\n          <td class=\"text-right border border-left-0 sm-hide\">{{(position.price * position.quantity) | number:\"1.2-2\"}} </td>\n          <td class=\"text-right\">{{position.pnl.tpl() | number:\"1.2-2\"}}</td>\n          <td class=\"text-right sm-hide\">{{position.pnl.upl | number:\"1.2-2\"}}</td>\n          <td class=\"text-right border border-left-0 sm-hide\">{{position.pnl.rpl | number:\"1.2-2\"}}</td>\n        </tr>\n      </ng-container>\n\n    </tbody>\n  </table>\n</div>\n"
+module.exports = "<div class=\"p-4\">\n  <button class=\"btn btn-default\" (click)=\"load()\">Load</button>\n  <button class=\"btn btn-default\" (click)=\"reset()\">Reset</button>\n\n  <table class=\"table table-striped table-hover\">\n    <thead>\n      <tr class=\"font-bold sm-hide\">\n        <th></th>\n        <th colspan=\"3\" class=\"text-center\">Instrument</th>\n        <th colspan=\"4\" class=\"text-center\">Position</th>\n        <th colspan=\"3\" class=\"text-center\">Profit / Loss</th>\n      </tr>\n      <tr class=\"font-bold \">\n        <th class=\"\">Portfolio</th>\n        <th class=\"text-right header-market-price\"><span>Market Price</span></th>\n        <th class=\"sm-hide\">Currency</th>\n        <th class=\"sm-hide\">Issuer</th>\n        <th class=\"header-direction\"><span>Direction</span></th>\n        <th class=\"text-right\">Price</th>\n        <th class=\"text-right header-quantity\"><span>Quantity</span></th>\n        <th class=\"text-right sm-hide\">Value</th>\n        <th class=\"text-right\">TPL</th>\n        <th class=\"text-right sm-hide\">UPL</th>\n        <th class=\"text-right sm-hide\">RPL</th>\n      </tr>\n    </thead>\n\n    <tbody>\n\n      <ng-container *ngFor=\"let kv of portfolios() | keyValue\">\n        <tr class=\"border\">\n          <td class=\"font-bold\">{{kv.key}}</td>\n          <td></td>\n          <td class=\"sm-hide\"></td>\n          <td class=\"sm-hide\"></td>\n          <td></td>\n          <td></td>\n          <td></td>\n          <td class=\"sm-hide\"></td>\n          <td class=\"font-bold text-right \">{{kv.value.pnl.tpl() | number:\"1.2-2\"}}</td>\n          <td class=\"font-bold text-right sm-hide\">{{kv.value.pnl.upl | number:\"1.2-2\"}}</td>\n          <td class=\"font-bold text-right sm-hide\">{{kv.value.pnl.rpl | number:\"1.2-2\"}}</td>\n        </tr>\n        <tr *ngFor=\"let position of kv.value.positions\" class=\"border\">\n          <td class=\"border\">\n            <span class=\"ml-2 mr-2\"> </span>\n            <span>{{position.instrument.name}}</span>\n          </td>\n          <td class=\"text-right\">{{ getMarketPrice(position.instrument.id) | number:\"1.2-2\"}}</td>\n          <td class=\"sm-hide\">{{position.instrument.currency}}</td>\n          <td class=\"border border-left-0 sm-hide\">{{position.instrument.issuer}}</td>\n          <td>{{position.direction}}</td>\n          <td class=\"text-right\">{{position.price | number:\"1.2-2\"}}</td>\n          <td class=\"text-right\">{{position.quantity}}</td>\n          <td class=\"text-right border border-left-0 sm-hide\">{{(position.price * position.quantity) | number:\"1.2-2\"}} </td>\n          <td class=\"text-right\">{{position.pnl.tpl() | number:\"1.2-2\"}}</td>\n          <td class=\"text-right sm-hide\">{{position.pnl.upl | number:\"1.2-2\"}}</td>\n          <td class=\"text-right border border-left-0 sm-hide\">{{position.pnl.rpl | number:\"1.2-2\"}}</td>\n        </tr>\n      </ng-container>\n\n    </tbody>\n  </table>\n</div>\n"
 
 /***/ }),
 
